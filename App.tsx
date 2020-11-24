@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {FlatList, SafeAreaView, StatusBar, StyleSheet, Text,View, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 
 const Item = ({ item, onPress, style}:any) => (
@@ -34,22 +34,20 @@ export default function App() {
   };
 
   return (
-    <div>
+    <View style={styles.container}>
       {isLoading == true ? 
-        <div>Loading...</div>
-         : 
-        <SafeAreaView style={styles.container}>
-          <FlatList
-            data={listNearEarthObjects}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            extraData={selectedId}
-          />
-        </SafeAreaView>
-      }
-    </div>
-    
-  );
+      <Text >"loading ..."</Text>
+       : 
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={listNearEarthObjects}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          extraData={selectedId}
+        />
+      </SafeAreaView>
+    }
+    </View>);
 }
 
 const styles = StyleSheet.create({
