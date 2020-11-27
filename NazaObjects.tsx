@@ -1,11 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import {FlatList, SafeAreaView, StatusBar, StyleSheet, Text,View, TouchableOpacity} from 'react-native';
+import {FlatList, SafeAreaView, Image, StatusBar, StyleSheet, Text, TouchableOpacity, Alert, Button} from 'react-native';
 import axios from 'axios';
+import styled from "styled-components";
+
+
+// function useLocalStorageState (key: any, defaultValue:any){
+//     const [state, setState] = React.useState( 
+//       () => window.localStorage.getItem(key) || defaultValue
+//       )
+  
+//     React.useEffect(()=>{
+//         console.log("useEffect of "+key+" used");
+//         window.localStorage.setItem(key, state)
+//         return ()=> { console.log("cleanup useEffect of "+key); }
+//     }, [state]);
+
+//     return [state, setState];
+// }
+
+// const StyledTouchableOpacity = styled(TouchableOpacity)`
+// width: 50%;
+// `;
+
+// 
+
 
 const Item = ({ item, onPress, style}:any) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
     <Text style={styles.title}>{item.name}</Text>
   </TouchableOpacity>
+  
 );
 
 export default function NazaObjects() {
@@ -13,7 +37,7 @@ export default function NazaObjects() {
   const [listNearEarthObjects, setlistNearEarthObjects] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const url="http://www.neowsapp.com/rest/v1/neo/browse?page=0&size=20&api_key=y125lgm1Npphd8NEldDxfgTQ5q1NsnCsXzTgjqXw"
-
+  
   React.useEffect(() => {
     axios
     .get(url)
@@ -27,30 +51,23 @@ export default function NazaObjects() {
     })  
   },[]);
   
-  
   const renderItem = ({ item }:any) => {
     const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-    return <Item item={item} onPress={() => setSelectedId(item.id)} style={{ backgroundColor }} />;
+    return ( <Item item={item} onPress={() => setSelectedId(item.id)} style={{ backgroundColor }} />);
   };
 
   return (
-    <View style={styles.container}>
-      {isLoading == true ? 
-      <Text >"loading ..."</Text>
+      isLoading == true ? 
+          <Text >"loading ..."</Text>
        : 
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          data={listNearEarthObjects}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          extraData={selectedId}
-        />
-      </SafeAreaView>
-    }
-    </View>);
+          <FlatList
+            data={listNearEarthObjects}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            extraData={selectedId}
+          /> 
+    );
 }
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
