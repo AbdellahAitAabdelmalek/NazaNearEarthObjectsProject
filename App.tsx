@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar, StyleSheet,Alert,Image,SafeAreaView,TouchableOpacity, Platform} from 'react-native';
-import NazaObjects from './NazaObjects';
+import NearEarthObjectsList from './src/modules/NearEarthObject/NearEarthObjectsList';
 
 const CustomImage = () => (
     <TouchableOpacity onPress={()=> Alert.alert("ImageClicked","You have clicked on the image",[ 
@@ -21,9 +21,8 @@ const CustomImage = () => (
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Image source={require("./assets/icon.png")} /> */}
-      {/* <CustomImage/> */}
-      <NazaObjects/> 
+      <Image style={styles.container} source={require("./assets/icon.png")} />
+      <NearEarthObjectsList/> 
     </SafeAreaView>
   );
 }
