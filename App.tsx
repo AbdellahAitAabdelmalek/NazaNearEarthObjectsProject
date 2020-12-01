@@ -1,10 +1,9 @@
 import React from 'react';
-import NearEarthObjectsList from './src/modules/NearEarthObject/hooks/NearEarthObjectsList';
-
+import { AppNavigator } from './src/navigation/AppNavigator/AppNavigator.navigator';
 
 export default function App() {
   return (
-      <NearEarthObjectsList/>
+    <AppNavigator/>
   );
 }
 

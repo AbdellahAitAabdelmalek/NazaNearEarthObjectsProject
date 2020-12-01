@@ -5,11 +5,15 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-  export default function NearEarthObjectItem({ item, onPress, style}:any) {
+
+  export default function NearEarthObjectItem({item}:any) {
+    const [selectedId, setSelectedId] = useState(null);
+    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
     return (
-    <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-        <Text style={styles.item}>{item.name}</Text>
-      </TouchableOpacity>);
+      <>
+          <Text style={styles.item}>{item.name}</Text>
+      </>
+      );
   }
 
   const styles = StyleSheet.create({

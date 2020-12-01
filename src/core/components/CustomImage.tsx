@@ -1,7 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Image, Alert} from 'react-native';
 
-export default function NearEarthObjectsList() {
+// comment specifier que imageUri est un string ?
+export default function CustomImage({imageUri}:any) {
 
     return (
     <TouchableOpacity onPress={()=> Alert.alert("ImageClicked","You have clicked on the image",[ 
@@ -15,7 +16,7 @@ export default function NearEarthObjectsList() {
           source={{
             width: 200,
             height:300,
-            uri : "https://picsum.photos/200/300"
+            uri : imageUri,
           }}/>
     </TouchableOpacity>);
 }

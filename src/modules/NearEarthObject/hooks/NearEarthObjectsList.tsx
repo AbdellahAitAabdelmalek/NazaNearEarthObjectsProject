@@ -28,12 +28,6 @@ export default function NearEarthObjectsList() {
   const [listNearEarthObjects, setlistNearEarthObjects] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   //const [isLoading2, listNearEarthObjects2] = fetchNearEarthObjectList;
-  
-  
-  const renderItem = ({ item }:any) => {
-    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-    return ( <NearEarthObjectItem item={item} onPress={() => setSelectedId(item.id)} style={{ backgroundColor }} />);
-  };
 
   React.useEffect(() => {
     axios
@@ -55,7 +49,7 @@ export default function NearEarthObjectsList() {
        :
           <FlatList
             data={listNearEarthObjects}
-            renderItem={renderItem}
+            renderItem={({item}) => {return (<NearEarthObjectItem  item={item}/>)}}
             keyExtractor={item => item.id}
             extraData={selectedId}
           />
