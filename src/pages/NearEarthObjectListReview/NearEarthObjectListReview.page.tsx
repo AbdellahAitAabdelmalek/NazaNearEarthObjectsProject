@@ -1,8 +1,12 @@
 import { NearEarthObjectListProps } from './NearEarthObjectDetailsReview.interface';
 import React, { FunctionComponent,useState ,useEffect } from 'react';
+import { theme } from '../../core/theme';
+import { colors } from '../../core/theme/colors';
+
 import {
   FlatList,
   Text,
+  View,
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
@@ -13,6 +17,8 @@ import axios from 'axios';
 import NearEarthObjectItem from '../../modules/NearEarthObject/components/NearEarthObjectItem';
 import { useNearEarthObjectListNavigation } from './NearEarthObjectDetailsReview.hooks';
 import { NearEarthObject } from '../../modules/NearEarthObject/types/NearEarthObject.type';
+import LoadingData  from '../../core/components/LoadingData';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const url = 'http://www.neowsapp.com/rest/v1/neo/browse?page=0&size=20&api_key=y125lgm1Npphd8NEldDxfgTQ5q1NsnCsXzTgjqXw'
 
@@ -24,7 +30,7 @@ export const NearEarthObjectListReview : FunctionComponent<NearEarthObjectListPr
 
  
   const localItem = ({item}:any)=> {
-    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+    const backgroundColor = item.id === selectedId ? colors.lightBlue : colors.mediumBlue;
     return (
       <TouchableOpacity onPress={()=>onPressItemHandler({item})} style={[styles.item, {backgroundColor}]} >
         <NearEarthObjectItem  item={item}/>
@@ -70,7 +76,8 @@ export const NearEarthObjectListReview : FunctionComponent<NearEarthObjectListPr
   return (
     <SafeAreaView style={styles.container}>
       {isLoading === true ?
-          <Text >"loading ..."</Text>
+          // <Text >"loading ..."</Text>
+          <LoadingData/>
        :
           <FlatList
             data={listNearEarthObjects}
@@ -87,11 +94,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    paddingTop: Platform.OS === "android" ? 20 : 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   item: {
     padding: 19,
     marginVertical: 8,
     marginHorizontal: 16,
-  }
+  },
 });

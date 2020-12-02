@@ -3,7 +3,7 @@ import {
   NearEarthObjectDetailsNavigatorRouteParamsList,
 } from '../../navigation/NearEarthObjectDetailsNavigator/NearEarthObjectDetailsNavigator.routes';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 
 export type NearEarthObjectDetailsScreenNavigationProp = StackNavigationProp<NearEarthObjectDetailsNavigatorRouteParamsList, NearEarthObjectDetailsNavigatorRouteNames.NearEarthObjectDetailsReview>;
 
