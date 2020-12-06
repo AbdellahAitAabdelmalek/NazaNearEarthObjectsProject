@@ -1,22 +1,23 @@
 import React from 'react';
-import {TouchableOpacity, Image, Alert} from 'react-native';
+import {TouchableOpacity, Image} from 'react-native';
 
+interface CustomImageProps {
+  onPressFunction?: any;
+  width: number;
+  height: number;
+  imageUrl: string;
+}
 // comment specifier que imageUri est un string ?
-export default function CustomImage({imageUri}:any) {
-
+export default function CustomImage(props: CustomImageProps) {
     return (
-    <TouchableOpacity onPress={()=> Alert.alert("ImageClicked","You have clicked on the image",[ 
-        {text: "Yes"},
-        {text: "No"},
-      ])
-    }>
-      {/* <Image style={styles.container} source={require("./assets/icon.png")} /> */}
+    <TouchableOpacity onPress={props.onPressFunction ? ()=>props.onPressFunction(): ()=>{console.log('image clicked')}}>
       <Image 
+          resizeMode="center"
           fadeDuration={1000}
           source={{
-            width: 200,
-            height:300,
-            uri : imageUri,
+            width: props.width,
+            height: props.height,
+            uri : props.imageUrl,
           }}/>
     </TouchableOpacity>);
 }

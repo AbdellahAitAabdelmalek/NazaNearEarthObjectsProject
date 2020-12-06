@@ -1,8 +1,8 @@
 export const fontFamilies = {
   black: 'Montserrat-Black',
   blackItalic: 'Montserrat-BlackItalic',
-  bold: 'Montserrat-Bold',
-  boldItalic: 'Montserrat-BoldItalic',
+  //bold: 'Montserrat-Bold',
+  //boldItalic: 'Montserrat-BoldItalic',
   extraBold: 'Montserrat-ExtraBold',
   extraBoldItalic: 'Montserrat-ExtraBoldItalic',
   extraLight: 'Montserrat-ExtraLight',

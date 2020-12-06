@@ -14,7 +14,6 @@ import CustomImage from '../../core/components/CustomImage'
 
 export const NearEarthObjectDetailsReview : FunctionComponent<NearEarthObjectDetailsProps> = ({ route, navigation }) => {  
   const NearEarthObject: NearEarthObject | undefined = route.params?.NearEarthObject;
-  console.log(NearEarthObject);
   return (
     <>
       <Text style={styles.text}>id = {NearEarthObject.id}</Text>
