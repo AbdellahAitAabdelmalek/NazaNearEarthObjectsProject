@@ -1,15 +1,18 @@
-import {
-  NearEarthObjectDetailsNavigatorRouteNames,
-  NearEarthObjectDetailsNavigatorRouteParamsList,
-} from '../../navigation/NearEarthObjectDetailsNavigator/NearEarthObjectDetailsNavigator.routes';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
+import {
+  AppNavigatorRouteParamsList,
+  AppNavigatorRouteNames,
+} from "../../navigation/AppNavigator/AppNavigator.routes";
 
-export type NearEarthObjectDetailsScreenNavigationProp = StackNavigationProp<NearEarthObjectDetailsNavigatorRouteParamsList, NearEarthObjectDetailsNavigatorRouteNames.NearEarthObjectDetailsReview>;
+export type NearEarthObjectDetailsScreenNavigationProp = StackNavigationProp<
+  AppNavigatorRouteParamsList,
+  AppNavigatorRouteNames.NearEarthObjectDetailsNavigator
+>;
 
 export type NearEarthObjectDetailsReviewScreenRouteProp = RouteProp<
-  NearEarthObjectDetailsNavigatorRouteParamsList,
-  NearEarthObjectDetailsNavigatorRouteNames.NearEarthObjectDetailsReview
+  AppNavigatorRouteParamsList,
+  AppNavigatorRouteNames.NearEarthObjectDetailsNavigator
 >;
 
 export type NearEarthObjectDetailsProps = {

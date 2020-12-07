@@ -1,7 +1,6 @@
 import { AppNavigatorRouteNames } from '../../navigation/AppNavigator/AppNavigator.routes';
-import { EpicNavigatorRouteNames } from '../../navigation/EpicNavigator/EpicNavigator.routes';
-import { NearEarthObjectListNavigatorRouteNames } from '../../navigation/NearEarthObjectListNavigator/NearEarthObjectListNavigator.routes';
 import { HomeScreenNavigationProp } from './Home.interface';
+
 
 export const useHomeNavigation = (
   navigation: HomeScreenNavigationProp
@@ -11,13 +10,9 @@ export const useHomeNavigation = (
 } => {
   
   const openPlayNearEarthObjectListScreen = () =>
-    navigation.navigate(AppNavigatorRouteNames.NearEarthObjectListNavigator, {
-      screen: NearEarthObjectListNavigatorRouteNames.NearEarthObjectListReview,
-    });
+    navigation.navigate(AppNavigatorRouteNames.NearEarthObjectListNavigator);
 
   const openPlayEpicReviewScreen = () =>
-    navigation.navigate(AppNavigatorRouteNames.EpicNavigator, {
-      screen: EpicNavigatorRouteNames.EpicReview,
-    });
+    navigation.navigate(AppNavigatorRouteNames.EpicNavigator);
   return { openPlayNearEarthObjectListScreen , openPlayEpicReviewScreen};
 };

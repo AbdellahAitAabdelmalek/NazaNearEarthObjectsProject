@@ -1,16 +1,15 @@
-import {NearEarthObjectListNavigatorRouteParamsList
-} from '../NearEarthObjectListNavigator/NearEarthObjectListNavigator.routes';
-import { NavigatorScreenParams } from '@react-navigation/native';
-import { EpicNavigatorRouteParamsList } from '../EpicNavigator/EpicNavigator.routes'
+import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 
 export enum AppNavigatorRouteNames {
-  Home = 'Home',
-  NearEarthObjectListNavigator = 'NearEarthObjectListNavigator',
-  EpicNavigator = 'EpicNavigator',
+  Home = "Home",
+  EpicNavigator = "EpicNavigator",
+  NearEarthObjectListNavigator = "NearEarthObjectListNavigator",
+  NearEarthObjectDetailsNavigator = "NearEarthObjectDetailsNavigator",
 }
 
 export type AppNavigatorRouteParamsList = {
   Home: undefined;
-  NearEarthObjectListNavigator: NavigatorScreenParams<NearEarthObjectListNavigatorRouteParamsList>;
-  EpicNavigator: NavigatorScreenParams<EpicNavigatorRouteParamsList>;
+  EpicNavigator: undefined;
+  NearEarthObjectListNavigator: undefined;
+  NearEarthObjectDetailsNavigator: { NearEarthObject: NearEarthObject };
 };

@@ -8,12 +8,5 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
-    // "paths": {
-    //   "@srs/*": ["./src/modules/srs/*"],
-    //   "@core/*": ["./src/core/*"],
-    //   "@pages/*": ["./src/pages/*"],
-    //   "@navigation/*": ["./src/navigation/*"],
-    //   "@root/*": ["./*"]
-    // }
   }
 }

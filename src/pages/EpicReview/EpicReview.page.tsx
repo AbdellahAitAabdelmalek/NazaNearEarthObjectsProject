@@ -23,8 +23,6 @@ export const MyContext = React.createContext();
 export const EpicReview: FunctionComponent<EpicReviewProps> = ({ navigation }) => {
   
   const [states, dispatch] = useReducer(appReducer, {date: new Date(), mode: 'enhanced'});
-
-  console.log(states);
     return (
       <MyContext.Provider value={[states, dispatch]}>
         <SafeAreaView  style={styles.container}>
