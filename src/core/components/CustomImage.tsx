@@ -3,16 +3,14 @@ import {TouchableOpacity, Image} from 'react-native';
 
 interface CustomImageProps {
   onPressFunction?: any;
-  width: number;
-  height: number;
-  imageUrl: string;
+  [propName: string]: any;
 }
 // comment specifier que imageUri est un string ?
 export default function CustomImage(props: CustomImageProps) {
     return (
     <TouchableOpacity onPress={props.onPressFunction ? ()=>props.onPressFunction(): ()=>{console.log('image clicked')}}>
       <Image 
-          resizeMode="center"
+          resizeMode={props.resizeMode}
           fadeDuration={1000}
           source={{
             width: props.width,

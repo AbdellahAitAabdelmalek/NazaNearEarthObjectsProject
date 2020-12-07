@@ -25,9 +25,9 @@ export const NearEarthObjectItem: React.FC <NearEarthObjectitemProps> = ({onItem
   `;
   const backgroundColor = NearEarthObject.id === selectedId ? colors.lightBlue : colors.mediumBlue;
     return (
-      <StyledTouchableOpacity onPress={()=>{setSelectedId(NearEarthObject.id);
-                                            onItemIsPressed(NearEarthObject)}} 
-                               >
+      <StyledTouchableOpacity onPress={()=>{
+            setSelectedId(NearEarthObject.id);
+            onItemIsPressed(NearEarthObject)}}>
         <Text>{NearEarthObject.name}</Text>
       </StyledTouchableOpacity>);
   }

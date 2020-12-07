@@ -6,11 +6,10 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function LoadingData ({loadingText='Loading...'}){
  return (
-        <View>
-          <Spinner
+          <Spinner 
             textContent={loadingText}
-            textStyle={{color: colors.white}}
+            textStyle={{color: colors.white,
+                        textAlign: 'center'}}
           />        
-        </View>
     );
 }

@@ -1,40 +1,81 @@
-import { theme } from '../../core/theme';
 import { colors } from '../../core/theme/colors';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState, useReducer, useContext } from 'react';
 import { EpicReviewProps } from './EpicReview.interface';
 import {Text, StyleSheet , Picker, View, Button,Image} from 'react-native';
-import CustomDatePicker from '../../core/components/CustomDataPicker';
 import {EpicListComponent} from '../../modules/Epic/components/EpicListComponent'
-import LoadingData from '../../core/components/LoadingData';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
+const appReducer = (states: {date: Date, mode: string}, action: any)=>{
+  switch(action.type){
+    case 'changeDate': 
+      states.date = action.payload;
+      return {...states};
+    case 'changeMode': 
+      states.mode = action.payload;
+      return {...states};
+  }
+}
+
+export const MyContext = React.createContext();
 
 export const EpicReview: FunctionComponent<EpicReviewProps> = ({ navigation }) => {
   
-  const [date, setDate] = useState<Date>(new Date());
-  const [mode, setMode] = useState<string>('natural');
+  const [states, dispatch] = useReducer(appReducer, {date: new Date(), mode: 'enhanced'});
 
+  console.log(states);
     return (
-      <SafeAreaView  style={styles.container}>
+      <MyContext.Provider value={[states, dispatch]}>
+        <SafeAreaView  style={styles.container}>
             <View style={{flex:1, alignItems:'stretch'}}>
-              <CustomDatePicker date={date} onDateChanges={(selectedDate:Date)=>setDate(selectedDate)} 
-                datePickerText="Choose the Picture Date"/>
+              <CustomDatePicker datePickerText="Choose the Picture Date"/>
             </View>  
             <View style={{flex:1, flexDirection:'row', alignItems:'stretch'}}>
               <Text style={{fontSize:16, color:colors.white}}>Choose the Picture mode : </Text>
-              <Picker selectedValue={mode} 
+              <Picker selectedValue={states.mode} 
                       style={styles.picker} 
-                      onValueChange={(itemValue) => setMode(itemValue)}>
+                      onValueChange={(itemValue) => dispatch({type:'changeMode', payload:itemValue})}>
                 <Picker.Item label="Natural"  value="natural" />
                 <Picker.Item label="Enhanced" value="enhanced" />
               </Picker>
             </View>     
             <View style={{ flex:8}}>
-              <EpicListComponent date={date} mode={mode}/>
+              <EpicListComponent />
             </View>       
-      </SafeAreaView> 
+        </SafeAreaView> 
+      </MyContext.Provider>
     );
+};
+
+const CustomDatePicker = (props: {datePickerText: string} ) => {
+  const [states, dispatch] = useContext(MyContext);
+  const [show, setShow] = useState<boolean>(false);
+  
+  // pour quoi le event type n'est pas le même 
+  const onChange = (event: any, selectedDate: Date | undefined) => {
+    setShow(Platform.OS === 'ios');
+  if (selectedDate){
+    dispatch({ type: 'changeDate', payload: selectedDate});
+    }
+  };
+
+  return (
+    <View style={{ flexDirection:'row'}}>
+      <Button onPress={()=>setShow(true)} title={props.datePickerText} />
+      <Text style={{fontSize:16, color:colors.white}}> Date : {states.date.toDateString()} </Text>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={states.date}
+          mode={'date'}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

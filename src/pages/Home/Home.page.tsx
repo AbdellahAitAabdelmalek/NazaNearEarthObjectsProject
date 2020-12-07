@@ -16,7 +16,6 @@ export const Home: FunctionComponent<HomeProps> = ({ navigation }) => {
         title="Go to the list of Near Earth Object"
         onPress={openPlayNearEarthObjectListScreen}
       />
-
       <Button 
         title="Go to the Earth Polychromatic Imaging Camera (EPIC)"
         onPress={openPlayEpicReviewScreen}
@@ -31,11 +30,6 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
     justifyContent: 'space-around',
     alignItems: 'center',
-  },
-  item: {
-    padding: 19,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
+  }
 });
 

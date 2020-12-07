@@ -17,14 +17,6 @@ export const NearEarthObjectListComponent : FunctionComponent<NearEarthObjectLis
   const [selectedId, setSelectedId] = useState<number>(-1);
   const [listNearEarthObjects, setlistNearEarthObjects] = useState<NearEarthObject []>();
   const [isLoading, setisLoading] = useState <boolean>(true);
- 
-  const localItem = ({item}:any)=> {
-    return (
-      <NearEarthObjectItem 
-        onItemIsPressed = {onItemIsPressed} 
-        {...item}
-      />);
-    };
 
   React.useEffect(() => {
     axios
@@ -63,8 +55,8 @@ export const NearEarthObjectListComponent : FunctionComponent<NearEarthObjectLis
             // pour quoi lorsque on utilise FlateList il y a plus de problème de typage
             <FlatListCustom
               data={listNearEarthObjects}
-              renderItem={localItem}
-              keyExtractor={(item:any) => item.id.toString()}
+              renderItem=  {({item}:any)=> <NearEarthObjectItem onItemIsPressed = {onItemIsPressed} {...item}/>}
+              keyExtractor={(item:any)=> item.id.toString()}
             />
         }
       </>
