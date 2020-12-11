@@ -2,14 +2,14 @@ import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthOb
 
 export enum AppNavigatorRouteNames {
   Home = "Home",
-  EpicNavigator = "EpicNavigator",
-  NearEarthObjectListNavigator = "NearEarthObjectListNavigator",
-  NearEarthObjectDetailsNavigator = "NearEarthObjectDetailsNavigator",
+  EpicScreen = "EpicScreen",
+  NearEarthObjectListScreen = "NearEarthObjectListScreen",
+  NearEarthObjectDetailsScreen = "NearEarthObjectDetailsScreen",
 }
 
 export type AppNavigatorRouteParamsList = {
   Home: undefined;
-  EpicNavigator: undefined;
-  NearEarthObjectListNavigator: undefined;
-  NearEarthObjectDetailsNavigator: { NearEarthObject: NearEarthObject };
+  EpicScreen: undefined;
+  NearEarthObjectListScreen: undefined;
+  NearEarthObjectDetailsScreen: { NearEarthObject: NearEarthObject };
 };

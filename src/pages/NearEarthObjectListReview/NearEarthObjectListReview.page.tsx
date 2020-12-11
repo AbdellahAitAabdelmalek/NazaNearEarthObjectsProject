@@ -1,8 +1,8 @@
 import { NearEarthObjectListProps } from "./NearEarthObjectListReview.interface";
 import { useNearEarthObjectListNavigation } from "./NearEarthObjectListReview.hooks";
 import React, { FunctionComponent } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
-import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponent";
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponentRQ";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import { colors } from "../../core/theme/colors";
 
@@ -15,14 +15,13 @@ export const NearEarthObjectListReview: FunctionComponent<NearEarthObjectListPro
 
   return (
     <>
-      <Text style={styles.text}> List of all Near Earth Objects : </Text>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <NearEarthObjectListComponent
           onItemIsPressed={(NearEarthObject: NearEarthObject) =>
             openPlayNearEarthObjectDetailsScreen(NearEarthObject)
           }
         />
-      </SafeAreaView>
+      </View>
     </>
   );
 };

@@ -5,7 +5,7 @@ import {
 } from "../../navigation/AppNavigator/AppNavigator.routes";
 export type EpicReviewScreenNavigationProp = StackNavigationProp<
   AppNavigatorRouteParamsList,
-  AppNavigatorRouteNames.EpicNavigator
+  AppNavigatorRouteNames.EpicScreen
 >;
 
 export type EpicReviewProps = {

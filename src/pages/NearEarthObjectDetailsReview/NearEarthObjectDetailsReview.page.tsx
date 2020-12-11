@@ -7,7 +7,6 @@ import styled from "styled-components/native";
 
 const CustomText = styled.Text`
   padding: 19px;
-  fontsize: 14;
   color: #ffffff;
 `;
 export const NearEarthObjectDetailsReview: FunctionComponent<NearEarthObjectDetailsProps> = ({

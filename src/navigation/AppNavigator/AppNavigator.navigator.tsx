@@ -44,21 +44,21 @@ export const AppNavigator: FunctionComponent = () => (
         options={{ headerTitle: "Welcome to Naza Project" }}
       />
       <homeStack.Screen
-        name={AppNavigatorRouteNames.EpicNavigator}
+        name={AppNavigatorRouteNames.EpicScreen}
         component={EpicReview}
         options={{ headerShown: true }}
       />
       <homeStack.Screen
-        name={AppNavigatorRouteNames.NearEarthObjectListNavigator}
+        name={AppNavigatorRouteNames.NearEarthObjectListScreen}
         component={NearEarthObjectListReview}
         options={{ headerShown: true }}
       />
       <homeStack.Screen
-        name={AppNavigatorRouteNames.NearEarthObjectDetailsNavigator}
+        name={AppNavigatorRouteNames.NearEarthObjectDetailsScreen}
         component={NearEarthObjectDetailsReview}
-        // options={({ route }) => ({
-        //   headerTitle: route.params.NearEarthObject.name,
-        // })}
+        options={({ route }) => ({
+          headerTitle: route.params.NearEarthObject.name,
+        })}
       />
     </homeStack.Navigator>
   </NavigationContainer>
