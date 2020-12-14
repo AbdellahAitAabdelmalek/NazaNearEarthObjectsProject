@@ -1,0 +1,6 @@
+module Pods_NazaNearEarthObjectsProject {
+  umbrella header "Pods-NazaNearEarthObjectsProject-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,31 +1,18 @@
-import { theme } from "../../../core/theme";
-import { colors } from "../../../core/theme/colors";
-import React, {
-  FunctionComponent,
-  useEffect,
-  useState,
-  useReducer,
-  useContext,
-} from "react";
-import {
-  Text,
-  StatusBar,
-  StyleSheet,
-  View,
-  Button,
-  Image,
-  SafeAreaView,
-} from "react-native";
+import React, { FunctionComponent, useState, useContext } from "react";
+import { StyleSheet, View } from "react-native";
 import axios from "axios";
 import { EpicPicture } from "../types/EpicPicture";
 import LoadingData from "../../../core/components/LoadingData";
 import { FlatList } from "react-native";
 import { Dimensions } from "react-native";
 import CustomImage from "../../../core/components/CustomImage";
-import { MyContext } from "../../../pages/EpicReview/EpicReview.page";
+import { StateContext } from "../../../pages/EpicReview/EpicReview.page";
 
 export const EpicListComponent: FunctionComponent = () => {
-  const [states, dispatch] = useContext(MyContext);
+  const states = useContext(StateContext);
+  if (states === undefined) {
+    throw new Error("CustomDatePicker must be used within a States Provider");
+  }
   const [dataState, setDataState] = useState<"loading" | "available">(
     "loading"
   );
