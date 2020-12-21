@@ -1,11 +1,12 @@
-import { EpicReviewScreenNavigationProp } from "./EpicReview.interface";
 
 export const useEpicReviewNavigation = (
-  navigation: EpicReviewScreenNavigationProp
+  // navigation: EpicReviewScreenNavigationProp
 ): {
   openPlayEpicReviewScreen: () => void;
 } => {
-  const openPlayEpicReviewScreen = () => {};
+  const openPlayEpicReviewScreen = () => {
+    return;
+  };
 
   return { openPlayEpicReviewScreen };
 };

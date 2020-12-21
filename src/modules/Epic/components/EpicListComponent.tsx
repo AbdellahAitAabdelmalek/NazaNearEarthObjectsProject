@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState, useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import axios from "axios";
 import { EpicPicture } from "../types/EpicPicture";
-import LoadingData from "../../../core/components/LoadingData";
 import { FlatList } from "react-native";
 import { Dimensions } from "react-native";
 import CustomImage from "../../../core/components/CustomImage";
@@ -18,7 +17,7 @@ export const EpicListComponent: FunctionComponent = () => {
   );
   const [listImage, setListImage] = useState<EpicPicture[]>();
 
-  const localItem = ({ item }: any) => {
+  const localItem = ({ item }: { item: EpicPicture }) => {
     const month: string = item.date.slice(5, 7);
     const day: string = item.date.slice(8, 10);
     const year: string = item.date.slice(0, 4);
@@ -40,7 +39,7 @@ export const EpicListComponent: FunctionComponent = () => {
         width={windowWidth}
         height={windowWidth}
         imageUrl={imageUrl}
-        resizeMode="center"
+        resizeMode='center'
       />
     );
   };
@@ -62,7 +61,7 @@ export const EpicListComponent: FunctionComponent = () => {
       "?api_key=y125lgm1Npphd8NEldDxfgTQ5q1NsnCsXzTgjqXw";
     axios
       .get(url)
-      .then((res: any) => {
+      .then((res) => {
         const myList: EpicPicture[] = res.data.map(function (
           EpicPicture: EpicPicture
         ) {
@@ -77,17 +76,29 @@ export const EpicListComponent: FunctionComponent = () => {
         setListImage(myList);
         setDataState("available");
       })
-      .catch((_err: any) => {
-        console.log("erreur !!!!");
+      .catch((_err) => {
+        console.log("erreur !!!!" + _err);
       });
   }, [states]);
 
   return (
     <View style={styles.container}>
       {dataState === "loading" ? (
-        <LoadingData loadingText="Image loading" />
+        <ActivityIndicator
+          size='large'
+          color='#00ff00'
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 100,
+            bottom: 0,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
       ) : (
-        <FlatList
+        <FlatList<EpicPicture>
           style={styles.flatList}
           data={listImage}
           renderItem={localItem}

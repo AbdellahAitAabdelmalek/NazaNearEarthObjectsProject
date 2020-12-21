@@ -1,19 +1,15 @@
-import React, {useState} from 'react';
-import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-} from 'react-native';
-import { NearEarthObject } from '../../NearEarthObject/types/NearEarthObject.type';
-import { colors } from '../../../core/theme/colors';
-import styled from 'styled-components/native';
-interface NearEarthObjectitemProps extends NearEarthObject{
+import React from "react";
+import { Text } from "react-native";
+import { NearEarthObject } from "../../NearEarthObject/types/NearEarthObject.type";
+import styled from "styled-components/native";
+interface NearEarthObjectitemProps extends NearEarthObject {
   onItemIsPressed: (NearEarthObject: NearEarthObject) => void;
 }
 
-export const NearEarthObjectItem: React.FC <NearEarthObjectitemProps> = ({onItemIsPressed, ...NearEarthObject})=> {
-  const [selectedId, setSelectedId] = useState<number | null> (null);
-
+export const NearEarthObjectItem: React.FC<NearEarthObjectitemProps> = ({
+  onItemIsPressed,
+  ...nearEarthObject
+}: NearEarthObjectitemProps) => {
   const StyledTouchableOpacity = styled.TouchableOpacity`
     width: 96%;
     height: 100px;
@@ -23,11 +19,13 @@ export const NearEarthObjectItem: React.FC <NearEarthObjectitemProps> = ({onItem
     border-radius: 20px;
     backgroundColor: #3f72af;
   `;
-  const backgroundColor = NearEarthObject.id === selectedId ? colors.lightBlue : colors.mediumBlue;
-    return (
-      <StyledTouchableOpacity onPress={()=>{
-            setSelectedId(NearEarthObject.id);
-            onItemIsPressed(NearEarthObject)}}>
-        <Text>{NearEarthObject.name}</Text>
-      </StyledTouchableOpacity>);
-  }
+  return (
+    <StyledTouchableOpacity
+      onPress={() => {
+        onItemIsPressed(nearEarthObject);
+      }}
+    >
+      <Text>{nearEarthObject.name}</Text>
+    </StyledTouchableOpacity>
+  );
+};

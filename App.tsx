@@ -1,22 +1,16 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { AppNavigator } from "./src/navigation/AppNavigator/AppNavigator.navigator";
-import { QueryCache, ReactQueryCacheProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query-devtools";
-const queryCache = new QueryCache();
+import { QueryClient, QueryClientProvider } from "react-query";
 
-if (__DEV__) {
-  import("react-query-native-devtools").then(({ addPlugin }) => {
-    addPlugin(queryCache);
-  });
-}
+const queryClient = new QueryClient();
 
-export default function App() {
+const App = (): ReactElement => {
   return (
     <>
-      {/* <ReactQueryCacheProvider queryCache={queryCache}></ReactQueryCacheProvider> */}
-      <AppNavigator />
-
-      {/* <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools> */}
+      <QueryClientProvider client={queryClient}>
+        <AppNavigator />
+      </QueryClientProvider>
     </>
   );
-}
+};
+export default App;
