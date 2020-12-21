@@ -1,6 +1,4 @@
-import { colors } from "../../core/theme/colors";
-import React, { FunctionComponent, useEffect } from "react";
-import { Text, StyleSheet } from "react-native";
+import React, { FunctionComponent } from "react";
 import { NearEarthObjectDetailsProps } from "./NearEarthObjectDetailsReview.interface";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import styled from "styled-components/native";
@@ -11,8 +9,7 @@ const CustomText = styled.Text`
 `;
 export const NearEarthObjectDetailsReview: FunctionComponent<NearEarthObjectDetailsProps> = ({
   route,
-  navigation,
-}) => {
+}: NearEarthObjectDetailsProps) => {
   const NearEarthObject: NearEarthObject | undefined =
     route.params?.NearEarthObject;
   return (
