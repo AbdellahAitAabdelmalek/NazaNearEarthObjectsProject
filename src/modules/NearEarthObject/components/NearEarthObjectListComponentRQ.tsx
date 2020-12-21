@@ -1,5 +1,12 @@
 import React, { FunctionComponent, useState } from "react";
-import { Button, FlatList, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+} from "react-native";
 import { NearEarthObjectItem } from "./NearEarthObjectItem";
 import { NearEarthObject } from "../types/NearEarthObject.type";
 import { useQuery } from "react-query";
@@ -23,13 +30,16 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
     NearEarthObject[]
   >([]);
   const [page, setPage] = useState<number>(0);
-  const { data, isLoading, isError, isSuccess, isPreviousData } = useQuery(
-    ["NearEarthObjects", page],
-    () => fetchNearEarthObjects(page),
-    {
-      keepPreviousData: true,
-    }
-  );
+  const {
+    data,
+    isLoading,
+    isError,
+    isSuccess,
+    isPreviousData,
+    isFetching,
+  } = useQuery(["NearEarthObjects", page], () => fetchNearEarthObjects(page), {
+    keepPreviousData: true,
+  });
 
   React.useEffect(() => {
     if (isSuccess) {
@@ -56,9 +66,9 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
     <>
       <View
         style={{
-          flex: 1,
+          width: "90%",
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           alignItems: "flex-start",
         }}
       >
@@ -67,7 +77,11 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
           disabled={page === 0}
           title='Previous Page'
         />
-        <Text style={{ color: colors.white }}>{page}</Text>
+        {isFetching ? (
+          <ActivityIndicator size='large' color='#00ff00' />
+        ) : (
+          <Text style={{ color: colors.white }}>{page}</Text>
+        )}
         <Button
           title='Next Page'
           onPress={() => {
@@ -75,44 +89,50 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
               setPage((old) => old + 1);
             }
           }}
-          // Disable the Next Page button until we know a next page is available
           disabled={isPreviousData}
         />
       </View>
 
       <View
         style={{
-          flex: 1,
-          width: "100%",
-          flexDirection: "column",
-          justifyContent: "flex-end",
+          width: "90%",
+          justifyContent: "flex-start",
+          alignItems: "stretch",
         }}
       >
         {isError && <Text style={{ color: colors.white }}> error </Text>}
         {isLoading && (
-          <Text style={{ color: colors.white }}> Loading ... </Text>
+          <ActivityIndicator
+            size='large'
+            color='#00ff00'
+            style={styles.activityIndicatorStyle}
+          />
         )}
         {isSuccess && (
-          <View
-            style={{
-              flex: 9,
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            <FlatList<NearEarthObject>
-              data={listNearEarthObjects}
-              renderItem={({ item }: { item: NearEarthObject }) => (
-                <NearEarthObjectItem
-                  onItemIsPressed={onItemIsPressed}
-                  {...item}
-                />
-              )}
-              keyExtractor={(item: NearEarthObject) => item.id.toString()}
-            />
-          </View>
+          <FlatList<NearEarthObject>
+            data={listNearEarthObjects}
+            renderItem={({ item }: { item: NearEarthObject }) => (
+              <NearEarthObjectItem
+                onItemIsPressed={onItemIsPressed}
+                {...item}
+              />
+            )}
+            keyExtractor={(item: NearEarthObject) => item.id.toString()}
+          />
         )}
       </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  activityIndicatorStyle: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 100,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
