@@ -6,30 +6,28 @@ import {
   View,
   StyleSheet,
   TextInput,
+  Button,
 } from "react-native";
 import { NearEarthObjectItem } from "./NearEarthObjectItem";
 import { NearEarthObject } from "../types/NearEarthObject.type";
-import { useQuery } from "react-query";
 import { colors } from "../../../core/theme/colors";
 
-const url =
-  "http://www.neowsapp.com/rest/v1/neo/browse?api_key=y125lgm1Npphd8NEldDxfgTQ5q1NsnCsXzTgjqXw";
+import { fetchNearEarthObjectList } from "../Hooks/NearEarthObjectListComponentRQInfinitListHooks";
 
 interface NearEarthObjectListProps {
   onItemIsPressed: (NearEarthObject: NearEarthObject) => void;
 }
 
-const fetchNearEarthObjects = async (page: number) => {
-  const res = await fetch(url + "&page=" + page);
-  return res.json();
-};
-
 export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectListProps> = ({
   onItemIsPressed,
 }: NearEarthObjectListProps) => {
-  const [listNearEarthObjects, setlistNearEarthObjects] = useState<
+  const [listNearEarthObjects, setListNearEarthObjects] = useState<
     NearEarthObject[]
   >([]);
+  const [
+    listNearEarthObjectsFiltred,
+    setListNearEarthObjectsFiltred,
+  ] = useState<NearEarthObject[]>([]);
   const [searchedName, setsearchedName] = useState<string>("");
   const [page, setPage] = useState<number>(0);
   const {
@@ -37,21 +35,17 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
     isLoading,
     isError,
     isSuccess,
-    isPreviousData,
     isFetching,
-  } = useQuery(["NearEarthObjects", page], () => fetchNearEarthObjects(page), {
-    keepPreviousData: true,
-  });
+  } = fetchNearEarthObjectList(page, searchedName);
 
-  const filterlistNearEarthObjects = (name: string) => {
+  const _filterListObjectByName = () => {
     const myFiltredList = listNearEarthObjects.filter(
       (nearEarthObject: NearEarthObject) =>
-        nearEarthObject.name.includes(searchedName)
+        nearEarthObject.name.toLowerCase().includes(searchedName.toLowerCase())
     );
-    console.log(listNearEarthObjects);
-    console.log(myFiltredList);
-    setlistNearEarthObjects(myFiltredList);
+    setListNearEarthObjectsFiltred(myFiltredList);
   };
+
   React.useEffect(() => {
     if (isSuccess) {
       const myList: NearEarthObject[] = data.near_earth_objects.map(function (
@@ -70,20 +64,22 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
           is_sentry_object: near_earth_object.is_sentry_object,
         };
       });
-      const myFiltredList = myList.filter((nearEarthObject: NearEarthObject) =>
-        nearEarthObject.name.includes(searchedName)
-      );
-      setlistNearEarthObjects(myFiltredList);
-      //searchObjectByName();
+      setListNearEarthObjects([...listNearEarthObjects, ...myList]);
+      _filterListObjectByName();
     }
-  }, [data, page, searchedName]);
+  }, [data]);
   return (
     <>
       <TextInput
         placeholder='Near Earth Object Name'
-        onChangeText={(text) => setsearchedName(text)}
-        //onSubmitEditing={() => _searchObjectByName()}
+        onChangeText={(text) => {
+          setsearchedName(text);
+          _filterListObjectByName();
+        }}
+        onSubmitEditing={() => _filterListObjectByName()}
+        style={{ textAlign: "center", color: colors.white }}
       />
+      <Button title='Search' onPress={() => _filterListObjectByName()} />
       <View
         style={{
           width: "90%",
@@ -101,7 +97,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
         )}
         {isSuccess && (
           <FlatList<NearEarthObject>
-            data={listNearEarthObjects}
+            data={listNearEarthObjectsFiltred}
             renderItem={({ item }: { item: NearEarthObject }) => (
               <NearEarthObjectItem
                 onItemIsPressed={onItemIsPressed}
@@ -112,7 +108,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
             onEndReachedThreshold={0.5}
             onEndReached={() => {
               console.log("onEndReached");
-              //setPage((old) => old + 1);
+              setPage((old) => old + 1);
             }}
           />
         )}
