@@ -27,7 +27,13 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <Text>
+  <Text
+    style={
+      Object {
+        "color": "#FFFFFF",
+      }
+    }
+  >
     adebl
   </Text>
 </View>
