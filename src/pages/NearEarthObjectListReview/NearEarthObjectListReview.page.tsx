@@ -2,7 +2,7 @@ import { NearEarthObjectListProps } from "./NearEarthObjectListReview.interface"
 import { useNearEarthObjectListNavigation } from "./NearEarthObjectListReview.hooks";
 import React, { FunctionComponent } from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
-import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponentRQ";
+import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponentRQInfinitList";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import { colors } from "../../core/theme/colors";
 
