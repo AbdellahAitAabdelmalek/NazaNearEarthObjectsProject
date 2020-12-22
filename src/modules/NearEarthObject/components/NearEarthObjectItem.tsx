@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { NearEarthObject } from "../../NearEarthObject/types/NearEarthObject.type";
 import styled from "styled-components/native";
+import { colors } from "../../../core/theme/colors";
 interface NearEarthObjectitemProps extends NearEarthObject {
   onItemIsPressed: (NearEarthObject: NearEarthObject) => void;
 }
@@ -25,7 +26,7 @@ export const NearEarthObjectItem: React.FC<NearEarthObjectitemProps> = ({
         onItemIsPressed(nearEarthObject);
       }}
     >
-      <Text>{nearEarthObject.name}</Text>
+      <Text style={{ color: colors.white }}>{nearEarthObject.name}</Text>
     </StyledTouchableOpacity>
   );
 };
