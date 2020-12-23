@@ -6,28 +6,28 @@ interface Action {
   payload: string | Date;
 }
 type Dispatch = (action: Action) => void;
-type States = {
+type State = {
   date: Date;
   mode: string;
 };
 
 const appReducer = (
-  states: { date: Date; mode: string },
+  state: { date: Date; mode: string },
   action: Action
-): States => {
+): State => {
   switch (action.type) {
     case "changeDate":
-      if (typeof action.payload !== "string") states.date = action.payload;
-      return { ...states };
+      if (typeof action.payload !== "string") state.date = action.payload;
+      return { ...state };
     case "changeMode":
-      if (typeof action.payload === "string") states.mode = action.payload;
-      return { ...states };
+      if (typeof action.payload === "string") state.mode = action.payload;
+      return { ...state };
     default:
-      return { ...states };
+      return { ...state };
   }
 };
 
-export const StateContext = React.createContext<States | undefined>({
+export const StateContext = React.createContext<State | undefined>({
   date: new Date(),
   mode: "enhanced",
 });

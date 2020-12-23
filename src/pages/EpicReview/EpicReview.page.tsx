@@ -29,12 +29,12 @@ export const EpicReview: FunctionComponent = () => {
   );
 };
 const CustomPicker = () => {
-  const states = useContext(StateContext);
+  const state = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
   if (dispatch === undefined) {
     throw new Error("CustomDatePicker must be used within a Dispatch Provider");
   }
-  if (states === undefined) {
+  if (state === undefined) {
     throw new Error("CustomDatePicker must be used within a States Provider");
   }
 
@@ -44,7 +44,7 @@ const CustomPicker = () => {
         Choose the Picture mode :{" "}
       </Text>
       <Picker
-        selectedValue={states.mode}
+        selectedValue={state.mode}
         style={styles.picker}
         onValueChange={(itemValue) =>
           dispatch({ type: "changeMode", payload: itemValue })
@@ -57,14 +57,14 @@ const CustomPicker = () => {
   );
 };
 const CustomDatePicker = (props: { datePickerText: string }) => {
-  const states = useContext(StateContext);
+  const state = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
   const [show, setShow] = useState<boolean>(false);
   if (dispatch === undefined) {
     throw new Error("CustomDatePicker must be used within a Dispatch Provider");
   }
-  if (states === undefined) {
-    throw new Error("CustomDatePicker must be used within a States Provider");
+  if (state === undefined) {
+    throw new Error("CustomDatePicker must be used within a State Provider");
   }
 
   // pour quoi le event type n'est pas le même
@@ -80,12 +80,12 @@ const CustomDatePicker = (props: { datePickerText: string }) => {
       <Button onPress={() => setShow(true)} title={props.datePickerText} />
       <Text style={{ fontSize: 16, color: colors.white }}>
         {" "}
-        Date : {states.date.toDateString()}{" "}
+        Date : {state.date.toDateString()}{" "}
       </Text>
       {show && (
         <DateTimePicker
           testID='dateTimePicker'
-          value={states.date}
+          value={state.date}
           mode={"date"}
           is24Hour={true}
           display='default'

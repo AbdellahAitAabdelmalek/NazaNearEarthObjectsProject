@@ -2,7 +2,7 @@ import { theme } from "../../core/theme";
 import { colors } from "../../core/theme/colors";
 
 import { Home } from "../../pages/Home/Home.page";
-import { NearEarthObjectDetailsReview } from "../../pages/NearEarthObjectDetailsReview/NearEarthObjectDetailsReview.page";
+import NearEarthObjectDetailsReview from "../../pages/NearEarthObjectDetailsReview/NearEarthObjectDetailsReview.page";
 import { NearEarthObjectListReview } from "../../pages/NearEarthObjectListReview/NearEarthObjectListReview.page";
 import { EpicReview } from "../../pages/EpicReview/EpicReview.page";
 
@@ -20,7 +20,7 @@ const homeStack = createStackNavigator<AppNavigatorRouteParamsList>();
 
 export const AppNavigator: FunctionComponent = () => (
   <NavigationContainer>
-    <StatusBar barStyle="light-content" />
+    <StatusBar barStyle='light-content' />
     <homeStack.Navigator
       initialRouteName={AppNavigatorRouteNames.Home}
       screenOptions={{
