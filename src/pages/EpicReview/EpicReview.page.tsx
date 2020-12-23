@@ -1,88 +1,61 @@
 import { colors } from "../../core/theme/colors";
-import React, {
-  FunctionComponent,
-  useState,
-  useReducer,
-  useContext,
-} from "react";
+import React, { FunctionComponent, useState, useContext } from "react";
 import { Text, StyleSheet, Picker, View, Button } from "react-native";
 import { EpicListComponent } from "../../modules/Epic/components/EpicListComponent";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar, Platform } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
-interface Action {
-  type: string;
-  payload: string | Date;
-}
-type Dispatch = (action: Action) => void;
-type States = {
-  date: Date;
-  mode: string;
-};
-const appReducer = (
-  states: { date: Date; mode: string },
-  action: Action
-): States => {
-  switch (action.type) {
-    case "changeDate":
-      if (typeof action.payload !== "string") states.date = action.payload;
-      return { ...states };
-    case "changeMode":
-      if (typeof action.payload === "string") states.mode = action.payload;
-      return { ...states };
-    default:
-      return { ...states };
-  }
-};
-
-export const StateContext = React.createContext<States | undefined>({
-  date: new Date(),
-  mode: "enhanced",
-});
-
-export const DispatchContext = React.createContext<Dispatch | undefined>(
-  undefined
-);
+import {
+  ContextProvider,
+  StateContext,
+  DispatchContext,
+} from "./EpicReview.hooks";
 
 export const EpicReview: FunctionComponent = () => {
-  const [states, dispatch] = useReducer(appReducer, {
-    date: new Date(),
-    mode: "enhanced",
-  });
   return (
-    <StateContext.Provider value={states}>
-      <DispatchContext.Provider value={dispatch}>
-        <SafeAreaView style={styles.container}>
-          <View style={{ flex: 1, alignItems: "stretch" }}>
-            <CustomDatePicker datePickerText='Choose the Picture Date' />
-          </View>
-          <View
-            style={{ flex: 1, flexDirection: "row", alignItems: "stretch" }}
-          >
-            <Text style={{ fontSize: 16, color: colors.white }}>
-              Choose the Picture mode :{" "}
-            </Text>
-            <Picker
-              selectedValue={states.mode}
-              style={styles.picker}
-              onValueChange={(itemValue) =>
-                dispatch({ type: "changeMode", payload: itemValue })
-              }
-            >
-              <Picker.Item label='Natural' value='natural' />
-              <Picker.Item label='Enhanced' value='enhanced' />
-            </Picker>
-          </View>
-          <View style={{ flex: 8 }}>
-            <EpicListComponent />
-          </View>
-        </SafeAreaView>
-      </DispatchContext.Provider>
-    </StateContext.Provider>
+    <ContextProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={{ flex: 1, alignItems: "stretch" }}>
+          <CustomDatePicker datePickerText='Choose the Picture Date' />
+        </View>
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "stretch" }}>
+          <CustomPicker />
+        </View>
+        <View style={{ flex: 8 }}>
+          <EpicListComponent />
+        </View>
+      </SafeAreaView>
+    </ContextProvider>
   );
 };
+const CustomPicker = () => {
+  const states = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
+  if (dispatch === undefined) {
+    throw new Error("CustomDatePicker must be used within a Dispatch Provider");
+  }
+  if (states === undefined) {
+    throw new Error("CustomDatePicker must be used within a States Provider");
+  }
 
+  return (
+    <>
+      <Text style={{ fontSize: 16, color: colors.white }}>
+        Choose the Picture mode :{" "}
+      </Text>
+      <Picker
+        selectedValue={states.mode}
+        style={styles.picker}
+        onValueChange={(itemValue) =>
+          dispatch({ type: "changeMode", payload: itemValue })
+        }
+      >
+        <Picker.Item label='Natural' value='natural' />
+        <Picker.Item label='Enhanced' value='enhanced' />
+      </Picker>
+    </>
+  );
+};
 const CustomDatePicker = (props: { datePickerText: string }) => {
   const states = useContext(StateContext);
   const dispatch = useContext(DispatchContext);

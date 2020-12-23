@@ -5,7 +5,7 @@ import { EpicPicture } from "../types/EpicPicture";
 import { FlatList } from "react-native";
 import { Dimensions } from "react-native";
 import CustomImage from "../../../core/components/CustomImage";
-import { StateContext } from "../../../pages/EpicReview/EpicReview.page";
+import { StateContext } from "../../../pages/EpicReview/EpicReview.hooks";
 
 export const EpicListComponent: FunctionComponent = () => {
   const states = useContext(StateContext);
