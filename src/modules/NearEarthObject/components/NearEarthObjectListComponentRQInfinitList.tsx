@@ -30,13 +30,10 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
   ] = useState<NearEarthObject[]>([]);
   const [searchedName, setsearchedName] = useState<string>("");
   const [page, setPage] = useState<number>(0);
-  const {
-    data,
-    isLoading,
-    isError,
-    isSuccess,
-    isFetching,
-  } = fetchNearEarthObjectList(page, searchedName);
+  const { data, isLoading, isError, isSuccess } = fetchNearEarthObjectList(
+    page,
+    searchedName
+  );
 
   const _filterListObjectByName = () => {
     const myFiltredList = listNearEarthObjects.filter(
@@ -65,18 +62,20 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
         };
       });
       setListNearEarthObjects([...listNearEarthObjects, ...myList]);
-      _filterListObjectByName();
     }
   }, [data]);
+
+  React.useEffect(() => {
+    _filterListObjectByName();
+  }, [searchedName]);
+
   return (
     <>
       <TextInput
         placeholder='Near Earth Object Name'
         onChangeText={(text) => {
           setsearchedName(text);
-          _filterListObjectByName();
         }}
-        onSubmitEditing={() => _filterListObjectByName()}
         style={{ textAlign: "center", color: colors.white }}
       />
       <Button title='Search' onPress={() => _filterListObjectByName()} />
