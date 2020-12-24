@@ -14,10 +14,10 @@ import {
 import React, { FunctionComponent } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "react-native";
+import { StatusBar, Image } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const homeStack = createStackNavigator<AppNavigatorRouteParamsList>();
-
 export const AppNavigator: FunctionComponent = () => (
   <NavigationContainer>
     <StatusBar barStyle='light-content' />
@@ -61,5 +61,101 @@ export const AppNavigator: FunctionComponent = () => (
         })}
       />
     </homeStack.Navigator>
+  </NavigationContainer>
+);
+
+const NeoStack = createStackNavigator<AppNavigatorRouteParamsList>();
+const NeoNavigator: FunctionComponent = () => (
+  <NeoStack.Navigator
+    initialRouteName={AppNavigatorRouteNames.NearEarthObjectListScreen}
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: colors.raisinBlack,
+        shadowColor: colors.black,
+      },
+      headerTintColor: colors.ivory,
+      headerTitleStyle: {
+        fontSize: theme.fontSizes.xxl,
+      },
+      headerBackTitleStyle: {
+        fontSize: theme.fontSizes.xl,
+      },
+      cardStyle: { backgroundColor: theme.colors.darkGrey },
+    }}
+  >
+    <NeoStack.Screen
+      name={AppNavigatorRouteNames.NearEarthObjectListScreen}
+      component={NearEarthObjectListReview}
+      options={{ headerShown: true }}
+    />
+    <NeoStack.Screen
+      name={AppNavigatorRouteNames.NearEarthObjectDetailsScreen}
+      component={NearEarthObjectDetailsReview}
+      options={({ route }) => ({
+        headerTitle: route.params.NearEarthObject.name,
+      })}
+    />
+  </NeoStack.Navigator>
+);
+
+const tabNavigator = createBottomTabNavigator();
+export const AppNavigator2: FunctionComponent = () => (
+  <NavigationContainer>
+    <StatusBar barStyle='light-content' />
+    <tabNavigator.Navigator
+      tabBarOptions={{
+        activeBackgroundColor: colors.ivory,
+        inactiveBackgroundColor: colors.white,
+        showLabel: false,
+      }}
+      initialRouteName={AppNavigatorRouteNames.Home}
+    >
+      <tabNavigator.Screen
+        name={AppNavigatorRouteNames.Home}
+        component={Home}
+        options={{
+          // eslint-disable-next-line react/display-name
+          tabBarIcon: () => {
+            return (
+              <Image
+                source={require("../../../assets/ic_favorite.png")}
+                style={{ width: 50, height: 50 }}
+              />
+            );
+          },
+        }}
+      />
+
+      <tabNavigator.Screen
+        name={AppNavigatorRouteNames.EpicScreen}
+        component={EpicReview}
+        options={{
+          // eslint-disable-next-line react/display-name
+          tabBarIcon: () => {
+            return (
+              <Image
+                source={require("../../../assets/icon.png")}
+                style={{ width: 50, height: 50 }}
+              />
+            );
+          },
+        }}
+      />
+      <tabNavigator.Screen
+        name={AppNavigatorRouteNames.NearEarthObjectListScreen}
+        component={NeoNavigator}
+        options={{
+          // eslint-disable-next-line react/display-name
+          tabBarIcon: () => {
+            return (
+              <Image
+                source={require("../../../assets/ic_favorite_border.png")}
+                style={{ width: 50, height: 50 }}
+              />
+            );
+          },
+        }}
+      />
+    </tabNavigator.Navigator>
   </NavigationContainer>
 );

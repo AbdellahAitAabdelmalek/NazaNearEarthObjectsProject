@@ -1,51 +1,19 @@
 import React, { FunctionComponent } from "react";
 import { NearEarthObjectDetailsProps } from "./NearEarthObjectDetailsReview.interface";
-import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import styled from "styled-components/native";
 import { connect } from "react-redux";
-import { StyleSheet, Image, Button } from "react-native";
+import { Button } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-const CustomText = styled.Text`
-  padding: 19px;
-  color: #ffffff;
-`;
-interface Action {
-  type: string;
-  value: string;
-}
-interface localNearEarthObjectDetailsProps extends NearEarthObjectDetailsProps {
-  dispatch: (action: Action) => void;
-  favoriteObject: string[];
-}
+import { useNearEarthObjectDetailsStates } from "./NearEarthObjectDetailsReview.hooks";
 
-const NearEarthObjectDetailsReview: FunctionComponent<localNearEarthObjectDetailsProps> = (
-  props: localNearEarthObjectDetailsProps
+const NearEarthObjectDetailsReview: FunctionComponent<NearEarthObjectDetailsProps> = (
+  props: NearEarthObjectDetailsProps
 ) => {
-  const nearEarthObject: NearEarthObject | undefined =
-    props.route.params?.NearEarthObject;
-
-  const toggleFavorite = () => {
-    const action = { type: "TOGGLE_FAVORITE", value: nearEarthObject.name };
-    props.dispatch(action);
-  };
-
-  const displayFavoriteImage = () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    let sourceImage = require("../../../assets/ic_favorite_border.png");
-    if (
-      props.favoriteObject.findIndex(
-        (item: string) => item === nearEarthObject.name
-      ) !== -1
-    ) {
-      // Film dans nos favoris
-      sourceImage = require("../../../assets/ic_favorite.png");
-    }
-    return <Image style={styles.favorite_image} source={sourceImage} />;
-  };
-
-  React.useEffect(() => {
-    console.log(props);
-  }, [props]);
+  const {
+    nearEarthObject,
+    toggleFavorite,
+    displayFavoriteImage,
+  } = useNearEarthObjectDetailsStates(props);
 
   return (
     <>
@@ -78,9 +46,7 @@ const mapStateToProps = (state: { favoriteObject: string[] }) => {
 
 export default connect(mapStateToProps)(NearEarthObjectDetailsReview);
 
-const styles = StyleSheet.create({
-  favorite_image: {
-    width: 40,
-    height: 40,
-  },
-});
+const CustomText = styled.Text`
+  padding: 19px;
+  color: #ffffff;
+`;

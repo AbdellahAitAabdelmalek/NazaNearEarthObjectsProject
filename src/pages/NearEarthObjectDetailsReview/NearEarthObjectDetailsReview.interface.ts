@@ -18,4 +18,11 @@ export type NearEarthObjectDetailsReviewScreenRouteProp = RouteProp<
 export type NearEarthObjectDetailsProps = {
   navigation: NearEarthObjectDetailsScreenNavigationProp;
   route: NearEarthObjectDetailsReviewScreenRouteProp;
+  dispatch: (action: Action) => void;
+  favoriteObject: string[];
 };
+
+export interface Action {
+  type: string;
+  value: string;
+}
