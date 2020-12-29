@@ -21,7 +21,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
   const [isLoading, setisLoading] = useState<boolean>(true);
 
   const loadData = async () => {
-    axios
+    await axios
       .get(url)
       .then((res) => {
         const myList: NearEarthObject[] = res.data.near_earth_objects.map(
