@@ -34,7 +34,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
     page,
     searchedName
   );
-
+  // filter listNearEarthObjects and put the result of that filter in ListNearEarthObjectsFiltred
   const _filterListObjectByName = () => {
     const myFiltredList = listNearEarthObjects.filter(
       (nearEarthObject: NearEarthObject) =>
@@ -44,31 +44,34 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
   };
 
   React.useEffect(() => {
+    console.log("states : " + isLoading, isError, isSuccess);
+    console.log("Data : " + data);
     if (isSuccess) {
-      const myList: NearEarthObject[] = data.near_earth_objects.map(function (
-        near_earth_object: NearEarthObject
-      ) {
-        return {
-          id: near_earth_object.id,
-          neo_reference_id: near_earth_object.neo_reference_id,
-          name: near_earth_object.name,
-          name_limited: near_earth_object.name_limited,
-          designation: near_earth_object.designation,
-          nasa_jpl_url: near_earth_object.nasa_jpl_url,
-          absolute_magnitude_h: near_earth_object.absolute_magnitude_h,
-          is_potentially_hazardous_asteroid:
-            near_earth_object.is_potentially_hazardous_asteroid,
-          is_sentry_object: near_earth_object.is_sentry_object,
-        };
-      });
-      setListNearEarthObjects([...listNearEarthObjects, ...myList]);
+      const myFiltredList: NearEarthObject[] = data.near_earth_objects.map(
+        function (near_earth_object: NearEarthObject) {
+          return {
+            id: near_earth_object.id,
+            neo_reference_id: near_earth_object.neo_reference_id,
+            name: near_earth_object.name,
+            name_limited: near_earth_object.name_limited,
+            designation: near_earth_object.designation,
+            nasa_jpl_url: near_earth_object.nasa_jpl_url,
+            absolute_magnitude_h: near_earth_object.absolute_magnitude_h,
+            is_potentially_hazardous_asteroid:
+              near_earth_object.is_potentially_hazardous_asteroid,
+            is_sentry_object: near_earth_object.is_sentry_object,
+          };
+        }
+      );
+      setListNearEarthObjects([...listNearEarthObjects, ...myFiltredList]);
+      // console.log("myFiltrerList : " + myFiltredList);
+      // console.log("listNearEarthObjects" + listNearEarthObjects);
     }
   }, [data]);
 
   React.useEffect(() => {
     _filterListObjectByName();
-  }, [searchedName]);
-
+  }, [searchedName, listNearEarthObjects]);
   return (
     <>
       <TextInput
