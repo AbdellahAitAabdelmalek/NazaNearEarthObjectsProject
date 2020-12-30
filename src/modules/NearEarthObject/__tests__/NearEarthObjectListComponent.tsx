@@ -3,6 +3,8 @@ import { act, create } from "react-test-renderer";
 import { NearEarthObjectListComponent } from "../components/NearEarthObjectListComponent";
 import { NearEarthObject } from "../types/NearEarthObject.type";
 import nock from "nock";
+import Store from "../../../Store/configureStore";
+import { Provider } from "react-redux";
 
 function tick() {
   return act(
@@ -49,21 +51,25 @@ test("renders correctly", async () => {
   let tree: any;
   await act(async () => {
     tree = create(
-      <NearEarthObjectListComponent
-        onItemIsPressed={(nearEarthObject: NearEarthObject) =>
-          console.log(" -- sent -- " + nearEarthObject.id)
-        }
-      />
+      <Provider store={Store}>
+        <NearEarthObjectListComponent
+          onItemIsPressed={(nearEarthObject: NearEarthObject) =>
+            console.log(" -- sent -- " + nearEarthObject.id)
+          }
+        />
+      </Provider>
     );
   });
 
   await act(async () => {
     tree.update(
-      <NearEarthObjectListComponent
-        onItemIsPressed={(nearEarthObject: NearEarthObject) =>
-          console.log(" -- sent -- " + nearEarthObject.id)
-        }
-      />
+      <Provider store={Store}>
+        <NearEarthObjectListComponent
+          onItemIsPressed={(nearEarthObject: NearEarthObject) =>
+            console.log(" -- sent -- " + nearEarthObject.id)
+          }
+        />
+      </Provider>
     );
   });
   await tick();

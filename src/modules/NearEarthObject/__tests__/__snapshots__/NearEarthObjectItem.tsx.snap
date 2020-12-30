@@ -36,5 +36,18 @@ exports[`renders correctly 1`] = `
   >
     adebl
   </Text>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../assets/ic_favorite_border.png",
+      }
+    }
+    style={
+      Object {
+        "height": 40,
+        "width": 40,
+      }
+    }
+  />
 </View>
 `;
