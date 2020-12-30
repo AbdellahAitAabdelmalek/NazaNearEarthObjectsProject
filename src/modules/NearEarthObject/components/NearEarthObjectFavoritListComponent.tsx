@@ -16,7 +16,6 @@ interface Action {
 const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectListProps> = (
   props: NearEarthObjectListProps
 ) => {
-  console.log("start - NearEarthObjectListComponent ");
   return (
     <>
       {props.favoriteObject.map((nearEarthObject) => {

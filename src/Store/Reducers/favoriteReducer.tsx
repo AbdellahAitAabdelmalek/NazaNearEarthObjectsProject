@@ -13,24 +13,20 @@ function toggleFavorite(state: State = initialState, action: Action): State {
   let nextState: State;
   switch (action.type) {
     case "TOGGLE_FAVORITE": {
-      console.log(state);
-      console.log(action);
-
       const checkIfFavorite = (nearEarthObject: NearEarthObject) => {
         return nearEarthObject.id === action.value.id;
       };
 
-      const favoriteObjectIndex2 = state.favoriteObject.findIndex(
+      const favoriteObjectIndex = state.favoriteObject.findIndex(
         checkIfFavorite
       );
-      console.log("find : " + favoriteObjectIndex2);
 
-      if (favoriteObjectIndex2 !== -1) {
+      if (favoriteObjectIndex !== -1) {
         // supprimer des favoris
         nextState = {
           ...state,
           favoriteObject: state.favoriteObject.filter(
-            (item, index) => index !== favoriteObjectIndex2
+            (item, index) => index !== favoriteObjectIndex
           ),
         };
       } else {

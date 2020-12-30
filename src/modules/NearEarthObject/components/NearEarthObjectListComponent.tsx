@@ -14,7 +14,6 @@ interface NearEarthObjectListProps {
 export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectListProps> = ({
   onItemIsPressed,
 }: NearEarthObjectListProps) => {
-  console.log("start - NearEarthObjectListComponent ");
   const [listNearEarthObjects, setlistNearEarthObjects] = useState<
     NearEarthObject[]
   >([]);
@@ -48,9 +47,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
       });
   };
   React.useEffect(() => {
-    console.log("start loading - ");
     loadData();
-    console.log("finish loading - ");
   }, []);
 
   return (

@@ -20,9 +20,7 @@ interface NearEarthObjectListProps {
 }
 
 const fetchNearEarthObjects = async (page: number) => {
-  console.log("fetch Near Earth Objects call to : " + url + "&page=" + page);
   const res = await fetch(url + "&page=" + page);
-  console.log();
   return res.json();
 };
 export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectListProps> = ({

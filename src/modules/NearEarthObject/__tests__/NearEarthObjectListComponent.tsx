@@ -51,7 +51,7 @@ test("renders correctly", async () => {
     tree = create(
       <NearEarthObjectListComponent
         onItemIsPressed={(nearEarthObject: NearEarthObject) =>
-          console.log(" -- send -- " + nearEarthObject.id)
+          console.log(" -- sent -- " + nearEarthObject.id)
         }
       />
     );
@@ -61,7 +61,7 @@ test("renders correctly", async () => {
     tree.update(
       <NearEarthObjectListComponent
         onItemIsPressed={(nearEarthObject: NearEarthObject) =>
-          console.log(" -- send -- " + nearEarthObject.id)
+          console.log(" -- sent -- " + nearEarthObject.id)
         }
       />
     );
