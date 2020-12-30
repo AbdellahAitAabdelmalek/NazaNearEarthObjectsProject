@@ -4,7 +4,7 @@ import { colors } from "../../core/theme/colors";
 import { Home } from "../../pages/Home/Home.page";
 import NearEarthObjectDetailsReview from "../../pages/NearEarthObjectDetailsReview/NearEarthObjectDetailsReview.page";
 import { NearEarthObjectListReview } from "../../pages/NearEarthObjectListReview/NearEarthObjectListReview.page";
-import { NearEarthObjectFavoritListReview } from "../../pages/NearEarthObjectFavoritListReview/NearEarthObjectFavoritListReview.page";
+import { NearEarthObjectFavoriteListReview } from "../../pages/NearEarthObjectListFavoriteReview/NearEarthObjectListFavoriteReview.page";
 import { EpicReview } from "../../pages/EpicReview/EpicReview.page";
 
 import {
@@ -45,8 +45,8 @@ const NeoListsNavigator: FunctionComponent = () => (
     />
 
     <NeoListsTabNavigator.Screen
-      name={AppNavigatorRouteNames.NearEarthObjectFavoritListScreen}
-      component={NearEarthObjectFavoritListReview}
+      name={AppNavigatorRouteNames.NearEarthObjectFavoriteListScreen}
+      component={NearEarthObjectFavoriteListReview}
       options={{
         // eslint-disable-next-line react/display-name
         tabBarIcon: () => {

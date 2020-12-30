@@ -1,7 +1,7 @@
 import { NearEarthObjectListProps } from "./NearEarthObjectListReview.interface";
 import { useNearEarthObjectListNavigation } from "./NearEarthObjectListReview.hooks";
 import React, { FunctionComponent } from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponentRQInfinitList";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import { colors } from "../../core/theme/colors";
@@ -29,7 +29,7 @@ export const NearEarthObjectListReview: FunctionComponent<NearEarthObjectListPro
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 10,
     justifyContent: "flex-start",
     alignItems: "center",
   },

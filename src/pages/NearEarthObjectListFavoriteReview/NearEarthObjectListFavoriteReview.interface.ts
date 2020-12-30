@@ -4,11 +4,11 @@ import {
 } from "../../navigation/AppNavigator/AppNavigator.routes";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-export type NearEarthObjectListFavoritScreenNavigationProp = StackNavigationProp<
+export type NearEarthObjectListFavoriteScreenNavigationProp = StackNavigationProp<
   AppNavigatorRouteParamsList,
-  AppNavigatorRouteNames.NearEarthObjectFavoritListScreen
+  AppNavigatorRouteNames.NearEarthObjectFavoriteListScreen
 >;
 
 export type NearEarthObjectListProps = {
-  navigation: NearEarthObjectListFavoritScreenNavigationProp;
+  navigation: NearEarthObjectListFavoriteScreenNavigationProp;
 };

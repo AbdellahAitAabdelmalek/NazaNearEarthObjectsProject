@@ -30,10 +30,14 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
   ] = useState<NearEarthObject[]>([]);
   const [searchedName, setsearchedName] = useState<string>("");
   const [page, setPage] = useState<number>(0);
-  const { data, isLoading, isError, isSuccess } = fetchNearEarthObjectList(
-    page,
-    searchedName
-  );
+  const {
+    data,
+    isLoading,
+    isError,
+    isSuccess,
+    isPreviousData,
+    isFetching,
+  } = fetchNearEarthObjectList(page, searchedName);
   // filter listNearEarthObjects and put the result of that filter in ListNearEarthObjectsFiltred
   const _filterListObjectByName = () => {
     const myFiltredList = listNearEarthObjects.filter(
@@ -74,29 +78,31 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
   }, [searchedName, listNearEarthObjects]);
   return (
     <>
-      <TextInput
-        placeholder='Near Earth Object Name'
-        onChangeText={(text) => {
-          setsearchedName(text);
-        }}
-        style={{ textAlign: "center", color: colors.white }}
-      />
-      <Button title='Search' onPress={() => _filterListObjectByName()} />
       <View
         style={{
           width: "90%",
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <TextInput
+          placeholder='Near Earth Object Name'
+          onChangeText={(text) => {
+            setsearchedName(text);
+          }}
+          style={{ textAlign: "center", color: colors.black, flex: 1 }}
+        />
+        <Button title='Search' onPress={() => _filterListObjectByName()} />
+      </View>
+
+      <View
+        style={{
+          width: "90%",
+          flex: 8,
           justifyContent: "flex-start",
           alignItems: "stretch",
         }}
       >
-        {isError && <Text style={{ color: colors.white }}> error </Text>}
-        {isLoading && (
-          <ActivityIndicator
-            size='large'
-            color='#00ff00'
-            style={styles.activityIndicatorStyle}
-          />
-        )}
         {isSuccess && (
           <FlatList<NearEarthObject>
             data={listNearEarthObjectsFiltred}
@@ -112,6 +118,14 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
               console.log("onEndReached");
               setPage((old) => old + 1);
             }}
+          />
+        )}
+        {isError && <Text style={{ color: colors.white }}> error </Text>}
+        {isFetching && (
+          <ActivityIndicator
+            size='large'
+            color='#00ff00'
+            style={styles.activityIndicatorStyle}
           />
         )}
       </View>

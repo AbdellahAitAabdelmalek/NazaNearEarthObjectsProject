@@ -4,7 +4,7 @@ export enum AppNavigatorRouteNames {
   Home = "Home",
   EpicScreen = "EpicScreen",
   NearEarthObjectListScreen = "NearEarthObjectListScreen",
-  NearEarthObjectFavoritListScreen = "NearEarthObjectFavoritListScreen",
+  NearEarthObjectFavoriteListScreen = "NearEarthObjectFavoriteListScreen",
   NearEarthObjectDetailsScreen = "NearEarthObjectDetailsScreen",
 }
 
@@ -12,6 +12,6 @@ export type AppNavigatorRouteParamsList = {
   Home: undefined;
   EpicScreen: undefined;
   NearEarthObjectListScreen: undefined;
-  NearEarthObjectFavoritListScreen: undefined;
+  NearEarthObjectFavoriteListScreen: undefined;
   NearEarthObjectDetailsScreen: { NearEarthObject: NearEarthObject };
 };

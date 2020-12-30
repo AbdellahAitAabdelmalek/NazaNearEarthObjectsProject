@@ -1,9 +1,9 @@
 import { AppNavigatorRouteNames } from "../../navigation/AppNavigator/AppNavigator.routes";
-import { NearEarthObjectListFavoritScreenNavigationProp } from "./NearEarthObjectFavoritListReview.interface";
+import { NearEarthObjectListFavoriteScreenNavigationProp } from "./NearEarthObjectListFavoriteReview.interface";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 
-export const useNearEarthObjectListFavoritNavigation = (
-  navigation: NearEarthObjectListFavoritScreenNavigationProp
+export const useNearEarthObjectListFavoriteNavigation = (
+  navigation: NearEarthObjectListFavoriteScreenNavigationProp
 ): {
   openPlayNearEarthObjectDetailsScreen: (
     NearEarthObject: NearEarthObject
