@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 import { NearEarthObject } from "../types/NearEarthObject.type";
 import { ActivityIndicator, StyleSheet } from "react-native";
-import { NearEarthObjectItem } from "./NearEarthObjectItem";
+import NearEarthObjectItem from "./NearEarthObjectItem";
 import axios from "axios";
 
 const url =

@@ -14,16 +14,17 @@ export const useNearEarthObjectDetailsStates = (
     props.route.params?.NearEarthObject;
 
   const toggleFavorite = () => {
-    const action = { type: "TOGGLE_FAVORITE", value: nearEarthObject.name };
+    const action = { type: "TOGGLE_FAVORITE", value: nearEarthObject };
     props.dispatch(action);
   };
 
   const displayFavoriteImage = () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     let sourceImage = require("../../../assets/ic_favorite_border.png");
+
     if (
       props.favoriteObject.findIndex(
-        (item: string) => item === nearEarthObject.name
+        (item: NearEarthObject) => item.id === nearEarthObject.id
       ) !== -1
     ) {
       sourceImage = require("../../../assets/ic_favorite.png");

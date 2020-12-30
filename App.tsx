@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { AppNavigator2 } from "./src/navigation/AppNavigator/AppNavigator.navigator";
+import { AppNavigator } from "./src/navigation/AppNavigator/AppNavigator.navigator";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 
@@ -11,7 +11,7 @@ const App = (): ReactElement => {
     <>
       <Provider store={Store}>
         <QueryClientProvider client={queryClient}>
-          <AppNavigator2 />
+          <AppNavigator />
         </QueryClientProvider>
       </Provider>
     </>

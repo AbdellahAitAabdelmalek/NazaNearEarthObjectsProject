@@ -8,7 +8,7 @@ import {
   TextInput,
   Button,
 } from "react-native";
-import { NearEarthObjectItem } from "./NearEarthObjectItem";
+import NearEarthObjectItem from "./NearEarthObjectItem";
 import { NearEarthObject } from "../types/NearEarthObject.type";
 import { colors } from "../../../core/theme/colors";
 

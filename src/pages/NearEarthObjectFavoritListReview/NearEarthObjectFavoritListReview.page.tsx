@@ -1,22 +1,22 @@
-import { NearEarthObjectListProps } from "./NearEarthObjectListReview.interface";
-import { useNearEarthObjectListNavigation } from "./NearEarthObjectListReview.hooks";
+import { NearEarthObjectListProps } from "./NearEarthObjectFavoritListReview.interface";
+import { useNearEarthObjectListFavoritNavigation } from "./NearEarthObjectFavoritListReview.hooks";
 import React, { FunctionComponent } from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
-import { NearEarthObjectListComponent } from "../../modules/NearEarthObject/components/NearEarthObjectListComponentRQInfinitList";
+import NearEarthObjectFavoritListComponent from "../../modules/NearEarthObject/components/NearEarthObjectFavoritListComponent";
 import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 import { colors } from "../../core/theme/colors";
 
-export const NearEarthObjectListReview: FunctionComponent<NearEarthObjectListProps> = ({
+export const NearEarthObjectFavoritListReview: FunctionComponent<NearEarthObjectListProps> = ({
   navigation,
 }: NearEarthObjectListProps) => {
   const {
     openPlayNearEarthObjectDetailsScreen,
-  } = useNearEarthObjectListNavigation(navigation);
+  } = useNearEarthObjectListFavoritNavigation(navigation);
 
   return (
     <>
       <View style={styles.container}>
-        <NearEarthObjectListComponent
+        <NearEarthObjectFavoritListComponent
           onItemIsPressed={(NearEarthObject: NearEarthObject) =>
             openPlayNearEarthObjectDetailsScreen(NearEarthObject)
           }

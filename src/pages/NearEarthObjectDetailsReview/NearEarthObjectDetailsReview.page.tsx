@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Button } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNearEarthObjectDetailsStates } from "./NearEarthObjectDetailsReview.hooks";
+import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 
 const NearEarthObjectDetailsReview: FunctionComponent<NearEarthObjectDetailsProps> = (
   props: NearEarthObjectDetailsProps
@@ -40,7 +41,7 @@ const NearEarthObjectDetailsReview: FunctionComponent<NearEarthObjectDetailsProp
   );
 };
 
-const mapStateToProps = (state: { favoriteObject: string[] }) => {
+const mapStateToProps = (state: { favoriteObject: NearEarthObject[] }) => {
   return { favoriteObject: state.favoriteObject };
 };
 

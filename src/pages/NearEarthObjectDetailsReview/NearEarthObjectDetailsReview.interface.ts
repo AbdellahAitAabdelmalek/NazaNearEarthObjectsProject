@@ -4,6 +4,7 @@ import {
   AppNavigatorRouteParamsList,
   AppNavigatorRouteNames,
 } from "../../navigation/AppNavigator/AppNavigator.routes";
+import { NearEarthObject } from "../../modules/NearEarthObject/types/NearEarthObject.type";
 
 export type NearEarthObjectDetailsScreenNavigationProp = StackNavigationProp<
   AppNavigatorRouteParamsList,
@@ -19,10 +20,10 @@ export type NearEarthObjectDetailsProps = {
   navigation: NearEarthObjectDetailsScreenNavigationProp;
   route: NearEarthObjectDetailsReviewScreenRouteProp;
   dispatch: (action: Action) => void;
-  favoriteObject: string[];
+  favoriteObject: NearEarthObject[];
 };
 
 export interface Action {
   type: string;
-  value: string;
+  value: NearEarthObject;
 }

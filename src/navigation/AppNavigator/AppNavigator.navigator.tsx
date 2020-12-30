@@ -4,6 +4,7 @@ import { colors } from "../../core/theme/colors";
 import { Home } from "../../pages/Home/Home.page";
 import NearEarthObjectDetailsReview from "../../pages/NearEarthObjectDetailsReview/NearEarthObjectDetailsReview.page";
 import { NearEarthObjectListReview } from "../../pages/NearEarthObjectListReview/NearEarthObjectListReview.page";
+import { NearEarthObjectFavoritListReview } from "../../pages/NearEarthObjectFavoritListReview/NearEarthObjectFavoritListReview.page";
 import { EpicReview } from "../../pages/EpicReview/EpicReview.page";
 
 import {
@@ -16,6 +17,50 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar, Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const NeoListsTabNavigator = createBottomTabNavigator();
+const NeoListsNavigator: FunctionComponent = () => (
+  <NeoListsTabNavigator.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: colors.ivory,
+      inactiveBackgroundColor: colors.white,
+      showLabel: false,
+    }}
+    initialRouteName={AppNavigatorRouteNames.Home}
+  >
+    <NeoListsTabNavigator.Screen
+      name={AppNavigatorRouteNames.NearEarthObjectListScreen}
+      component={NearEarthObjectListReview}
+      options={{
+        // eslint-disable-next-line react/display-name
+        tabBarIcon: () => {
+          return (
+            <Image
+              source={require("../../../assets/icon.png")}
+              style={{ width: 50, height: 50 }}
+            />
+          );
+        },
+      }}
+    />
+
+    <NeoListsTabNavigator.Screen
+      name={AppNavigatorRouteNames.NearEarthObjectFavoritListScreen}
+      component={NearEarthObjectFavoritListReview}
+      options={{
+        // eslint-disable-next-line react/display-name
+        tabBarIcon: () => {
+          return (
+            <Image
+              source={require("../../../assets/ic_favorite.png")}
+              style={{ width: 50, height: 50 }}
+            />
+          );
+        },
+      }}
+    />
+  </NeoListsTabNavigator.Navigator>
+);
 
 const homeStack = createStackNavigator<AppNavigatorRouteParamsList>();
 export const AppNavigator: FunctionComponent = () => (
@@ -50,7 +95,7 @@ export const AppNavigator: FunctionComponent = () => (
       />
       <homeStack.Screen
         name={AppNavigatorRouteNames.NearEarthObjectListScreen}
-        component={NearEarthObjectListReview}
+        component={NeoListsNavigator}
         options={{ headerShown: true }}
       />
       <homeStack.Screen

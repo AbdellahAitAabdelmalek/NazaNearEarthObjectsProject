@@ -7,7 +7,7 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import { NearEarthObjectItem } from "./NearEarthObjectItem";
+import NearEarthObjectItem from "./NearEarthObjectItem";
 import { NearEarthObject } from "../types/NearEarthObject.type";
 import { useQuery } from "react-query";
 import { colors } from "../../../core/theme/colors";
