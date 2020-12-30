@@ -36,7 +36,7 @@ const NeoListsNavigator: FunctionComponent = () => (
         tabBarIcon: () => {
           return (
             <Image
-              source={require("../../../assets/icon.png")}
+              source={require("../../../assets/ic_search.png")}
               style={{ width: 50, height: 50 }}
             />
           );
