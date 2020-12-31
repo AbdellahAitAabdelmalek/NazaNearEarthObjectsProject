@@ -35,9 +35,8 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
     isLoading,
     isError,
     isSuccess,
-    isPreviousData,
     isFetching,
-  } = fetchNearEarthObjectList(page, searchedName);
+  } = fetchNearEarthObjectList(page);
   // filter listNearEarthObjects and put the result of that filter in ListNearEarthObjectsFiltred
   const _filterListObjectByName = () => {
     const myFiltredList = listNearEarthObjects.filter(
@@ -67,9 +66,10 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
           };
         }
       );
+      console.log("myFiltrerList : " + myFiltredList);
       setListNearEarthObjects([...listNearEarthObjects, ...myFiltredList]);
-      // console.log("myFiltrerList : " + myFiltredList);
-      // console.log("listNearEarthObjects" + listNearEarthObjects);
+      console.log("listNearEarthObjects" + listNearEarthObjects);
+      _filterListObjectByName();
     }
   }, [data]);
 
@@ -81,7 +81,7 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
       <View
         style={{
           width: "90%",
-          flex: 1,
+          height: 40,
           flexDirection: "row",
         }}
       >
@@ -98,7 +98,6 @@ export const NearEarthObjectListComponent: FunctionComponent<NearEarthObjectList
       <View
         style={{
           width: "90%",
-          flex: 8,
           justifyContent: "flex-start",
           alignItems: "stretch",
         }}

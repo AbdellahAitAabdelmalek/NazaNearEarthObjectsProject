@@ -8,10 +8,7 @@ const fetchNearEarthObjects = async (page: number) => {
   return res.json();
 };
 
-export function fetchNearEarthObjectList(
-  page: number,
-  searchedText: string
-): any {
+export function fetchNearEarthObjectList(page: number): any {
   const {
     data,
     isLoading,
